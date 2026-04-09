@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import bg from "../assets/N_G.jpeg";
+import bg from "../assets/N_G1.jpeg";
 import music from "../assets/music.mp3";
 import Sparkles from "./Sparkles";
 import "./hero.css";
