@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500;1,700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  background: #fffaf5;
+}
+
+h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 4rem;
+}
+
+h2 {
+  color: #c5a47e;
+  letter-spacing: 3px;
+}
+section {
+  animation: fadeIn 1.2s ease-in;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(40px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  section {
+    padding: 60px 15px;
+  }
+
+  .card {
+    width: 90%;
+  }
+}
+/* ✨ SHIMMER EFFECT */
+/* ✨ LUXURY SHIMMER (BRIGHT LIGHT SWEEP) */
+
+
+/* ✨ SPARKLE CONTAINER */
+.sparkle-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* ✨ SPARKLES */
+.sparkle {
+  position: absolute;
+  bottom: -10px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+
+  animation: sparkleMove linear infinite, sparkleGlow 2s ease-in-out infinite;
+}
+
+/* ✨ FLOATING */
+@keyframes sparkleMove {
+  0% {
+    transform: translateY(0) scale(0.5);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-110vh) scale(1);
+    opacity: 0;
+  }
+}
+
+/* 🌟 GLOW */
+@keyframes sparkleGlow {
+  0% { box-shadow: 0 0 4px white; }
+  50% { box-shadow: 0 0 18px white; }
+  100% { box-shadow: 0 0 4px white; }
+}
+
+/* 💎 LUXURY 3D TEXT */
+/* 💎 LUXURY ITALIC TEXT */
+.luxury-text {
+  max-width: 800px;
+  font-size: 2.2rem;
+  line-height: 1.9;
+  text-align: center;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;   /* 👈 IMPORTANT */
+  letter-spacing: 1px;
+
+  /* ✨ GOLD GRADIENT */
+  background: linear-gradient(90deg, #d4af37, #fff, #d4af37);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* 🔥 SOFT 3D EFFECT */
+  text-shadow:
+    1px 1px 0 rgba(212,175,55,0.2),
+    2px 2px 10px rgba(0,0,0,0.4);
+
+  /* 🌟 GLOW */
+  animation: glowText 2s ease-in-out infinite alternate;
+}
+/* 🌟 GLOW ANIMATION */
+@keyframes glowText {
+  from {
+    text-shadow:
+      1px 1px 0 rgba(211, 205, 186, 0.3),
+      2px 2px 10px rgba(178, 175, 163, 0.5);
+  }
+  to {
+    text-shadow:
+      1px 1px 0 rgba(245, 243, 239, 0.5),
+      2px 2px 20px rgb(196, 190, 173);
+  }
+}
