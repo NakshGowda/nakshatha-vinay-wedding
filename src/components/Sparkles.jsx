@@ -7,7 +7,7 @@ export default function Sparkles() {
           className="sparkle"
           style={{
             left: Math.random() * 100 + "%",
-            animationDuration: 6 + Math.random() * 6 + "s",
+            animationDuration: 12 + Math.random() * 10 + "s",
 
             // 👇 MUCH SMALLER SIZE
             width: 1 + Math.random() * 2 + "px",
