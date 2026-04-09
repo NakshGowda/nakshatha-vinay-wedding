@@ -6,8 +6,7 @@ export default function Loader({ onEnter }) {
   const [isDrawing, setIsDrawing] = useState(false);
   const [scratchCount, setScratchCount] = useState(0);
 
-  // 👇 control how fast it triggers
-  const SCRATCH_THRESHOLD = 10; // 2–3 feels good
+  const SCRATCH_THRESHOLD = 10;
   const lastTimeRef = useRef(0);
 
   useEffect(() => {
@@ -22,19 +21,14 @@ export default function Loader({ onEnter }) {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }, []);
 
-  // 👉 START SCRATCH
-  const startDrawing = () => {
-    setIsDrawing(true);
-  };
+  // 👉 START / STOP
+  const startDrawing = () => setIsDrawing(true);
+  const stopDrawing = () => setIsDrawing(false);
 
-  const stopDrawing = () => {
-    setIsDrawing(false);
-  };
-
+  // ✨ SCRATCH FUNCTION (works for mouse + touch)
   const scratch = (e) => {
     if (!isDrawing) return;
 
-    // ⏱️ throttle (prevents too-fast triggering)
     const now = Date.now();
     if (now - lastTimeRef.current < 80) return;
     lastTimeRef.current = now;
@@ -43,29 +37,27 @@ export default function Loader({ onEnter }) {
     const ctx = canvas.getContext("2d");
 
     const rect = canvas.getBoundingClientRect();
+
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    // ✨ erase effect
     ctx.globalCompositeOperation = "destination-out";
     ctx.beginPath();
-    ctx.arc(x, y, 40, 0, Math.PI * 2);
+    ctx.arc(x, y, 50, 0, Math.PI * 2); // 👈 slightly bigger for mobile
     ctx.fill();
 
     createSpark(x, y);
 
-    // 👉 COUNT MOVEMENTS (not strokes)
     setScratchCount((prev) => {
       const newCount = prev + 1;
-
       if (newCount >= SCRATCH_THRESHOLD) {
-        onEnter(); // 🚀 show Hero.jsx
+        onEnter();
       }
-
       return newCount;
     });
   };
 
+  // ✨ SPARK EFFECT
   const createSpark = (x, y) => {
     for (let i = 0; i < 10; i++) {
       const spark = document.createElement("div");
@@ -78,7 +70,6 @@ export default function Loader({ onEnter }) {
       spark.style.setProperty("--y", Math.random());
 
       document.body.appendChild(spark);
-
       setTimeout(() => spark.remove(), 1200);
     }
   };
@@ -86,9 +77,21 @@ export default function Loader({ onEnter }) {
   return (
     <div
       className="loader-container"
+
+      // 🖱️ DESKTOP
       onMouseDown={startDrawing}
       onMouseUp={stopDrawing}
       onMouseMove={scratch}
+
+      // 📱 MOBILE (FIX)
+      onTouchStart={(e) => {
+        startDrawing();
+        scratch(e.touches[0]);
+      }}
+      onTouchMove={(e) => {
+        scratch(e.touches[0]);
+      }}
+      onTouchEnd={stopDrawing}
     >
       <div className="loader-text">
         Gently scratch the golden veil...
