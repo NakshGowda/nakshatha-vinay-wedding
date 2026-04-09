@@ -44,8 +44,8 @@
 /* ✨ FLOATING SILVER PARTICLES (MAIN EFFECT) */
 .sparkle {
   position: fixed;
-  width: 5px;
-  height: 5px;
+  width: 2px;
+  height: 2px;
   background: radial-gradient(circle, rgb(157, 135, 10), rgb(157, 135, 10));
   border-radius: 50%;
   pointer-events: none;
