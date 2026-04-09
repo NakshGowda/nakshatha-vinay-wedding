@@ -1,7 +1,7 @@
 export default function Sparkles() {
   return (
     <div className="sparkle-container">
-      {Array.from({ length: 30 }).map((_, i) => ( // 👈 reduced count
+      {Array.from({ length: 10 }).map((_, i) => ( // 👈 reduced count
         <span
           key={i}
           className="sparkle"
