@@ -1,11 +1,9 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import bg from "../assets/NV333.jpeg";
 import music from "../assets/music.mp3";
 import Sparkles from "./Sparkles";
 import "./hero.css";
-
-
 
 export default function Hero() {
   const { scrollY } = useScroll();
@@ -15,58 +13,28 @@ export default function Hero() {
   const opacity = useTransform(scrollY, [0, 400], [1, 0.7]);
 
   const audioRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
 
-  // 🎵 Fade-in function
-  const fadeInAudio = () => {
-  const audio = audioRef.current;
-  if (!audio) return;
+  // 🎵 AUTO PLAY WITH FALLBACK
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
 
-  audio.volume = 0;
+    audio.volume = 0.3;
 
-  audio.play().catch(() => {}); // ✅ FIX
+    // try autoplay
+    const playPromise = audio.play();
 
-  let vol = 0;
-  const interval = setInterval(() => {
-    if (vol < 0.3) {
-      vol += 0.02;
-      audio.volume = vol;
-    } else {
-      clearInterval(interval);
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // if blocked → play on first click anywhere
+        const startOnClick = () => {
+          audio.play();
+          window.removeEventListener("click", startOnClick);
+        };
+        window.addEventListener("click", startOnClick);
+      });
     }
-  }, 100);
-};
-
-  // 🎵 Start music on first interaction
- useEffect(() => {
-  const startMusic = () => {
-    if (!audioRef.current) return;
-
-    fadeInAudio();
-    setIsPlaying(true);
-
-    window.removeEventListener("click", startMusic);
-  };
-
-  window.addEventListener("click", startMusic);
-
-  return () => window.removeEventListener("click", startMusic);
-}, []);
-
-  // 🔊 Toggle button
- const toggleAudio = () => {
-  const audio = audioRef.current;
-  if (!audio) return;
-
-  if (isPlaying) {
-    audio.pause();
-    audio.currentTime = 0; // 🔥 reset (important)
-    setIsPlaying(false);
-  } else {
-    fadeInAudio();
-    setIsPlaying(true);
-  }
-};
+  }, []);
 
   return (
     <section style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
@@ -76,28 +44,7 @@ export default function Hero() {
         <source src={music} type="audio/mpeg" />
       </audio>
 
-      {/* 🔊 TOGGLE BUTTON */}
-      <button
-        onClick={toggleAudio}
-        style={{
-          position: "absolute",
-          top: "20px",
-          right: "20px",
-          zIndex: 10,
-          background: "rgba(255,255,255,0.2)",
-          border: "1px solid rgba(255,255,255,0.4)",
-          backdropFilter: "blur(6px)",
-          color: "white",
-          padding: "10px 14px",
-          borderRadius: "50px",
-          cursor: "pointer",
-          fontSize: "18px"
-        }}
-      >
-        {isPlaying ? "🔊" : "🔇"}
-      </button>
-
-      {/* 🌟 BACKGROUND IMAGE */}
+      {/* 🌟 BACKGROUND */}
       <img 
         src={bg}
         alt="wedding"
