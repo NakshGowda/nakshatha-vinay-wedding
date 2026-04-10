@@ -258,7 +258,7 @@
 }
 
 /* ✨ SECTION SPARKLES ONLY */
-.regards-sparkles::before {
+/* .regards-sparkles::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -273,7 +273,7 @@
 @keyframes sparkleSlow {
   from { transform: translateY(0); }
   to { transform: translateY(-200px); }
-}
+} */
 
 /* TEXT */
 .forever-text {
