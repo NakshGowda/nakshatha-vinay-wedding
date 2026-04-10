@@ -1,20 +1,16 @@
+import "./sparkle.css";
+
 export default function Sparkles() {
   return (
     <div className="sparkle-container">
-      {Array.from({ length: 10 }).map((_, i) => ( // 👈 reduced count
+      {Array.from({ length: 10 }).map((_, i) => (
         <span
           key={i}
           className="sparkle"
           style={{
             left: Math.random() * 100 + "%",
-            animationDuration: 25 + Math.random() * 20 + "s",
-
-            // 👇 MUCH SMALLER SIZE
-            width: 1 + Math.random() * 2 + "px",
-            height: 1 + Math.random() * 2 + "px",
-
-            // 👇 EXTRA BRIGHT
-            boxShadow: "0 0 8px rgba(255,255,255,0.9), 0 0 12px gold"
+            top: Math.random() * 100 + "%",
+            animationDuration: 30 + Math.random() * 20 + "s",
           }}
         ></span>
       ))}
