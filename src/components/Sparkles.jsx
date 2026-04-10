@@ -3,7 +3,7 @@ import "./sparkle.css";
 export default function Sparkles() {
   return (
     <div className="sparkle-container">
-      {Array.from({ length: 10 }).map((_, i) => (
+      {Array.from({ length: 6 }).map((_, i) => (
         <span
           key={i}
           className="sparkle"
