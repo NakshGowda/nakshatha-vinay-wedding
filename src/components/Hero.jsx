@@ -15,40 +15,52 @@ export default function Hero() {
   const audioRef = useRef(null);
 
   // 🎵 PLAY MUSIC ON FIRST INTERACTION (SCROLL / TOUCH)
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
+useEffect(() => {
+  const audio = audioRef.current;
+  if (!audio) return;
 
-    const playAudio = () => {
-      audio.volume = 0;
+  let hasPlayed = false;
 
-      audio.play().catch(() => {});
+  const playAudio = () => {
+    if (hasPlayed) return;
 
-      let vol = 0;
-      const interval = setInterval(() => {
-        if (vol < 0.3) {
-          vol += 0.02;
-          audio.volume = vol;
-        } else {
-          clearInterval(interval);
-        }
-      }, 100);
-    };
+    audio.volume = 0;
 
-    const startAudio = () => {
-      playAudio();
-      window.removeEventListener("scroll", startAudio);
-      window.removeEventListener("touchstart", startAudio);
-    };
+    audio.play()
+      .then(() => {
+        hasPlayed = true;
 
-    window.addEventListener("scroll", startAudio);
-    window.addEventListener("touchstart", startAudio);
+        let vol = 0;
+        const interval = setInterval(() => {
+          if (vol < 0.3) {
+            vol += 0.02;
+            audio.volume = vol;
+          } else {
+            clearInterval(interval);
+          }
+        }, 100);
 
-    return () => {
-      window.removeEventListener("scroll", startAudio);
-      window.removeEventListener("touchstart", startAudio);
-    };
-  }, []);
+        // remove listeners after success
+        window.removeEventListener("click", playAudio);
+        window.removeEventListener("touchstart", playAudio);
+        window.removeEventListener("scroll", playAudio);
+      })
+      .catch(() => {
+        // do nothing → wait for next interaction
+      });
+  };
+
+  // ✅ Multiple triggers (best coverage)
+  window.addEventListener("click", playAudio);
+  window.addEventListener("touchstart", playAudio, { passive: true });
+  window.addEventListener("scroll", playAudio);
+
+  return () => {
+    window.removeEventListener("click", playAudio);
+    window.removeEventListener("touchstart", playAudio);
+    window.removeEventListener("scroll", playAudio);
+  };
+}, []);
 
   return (
     <section style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
