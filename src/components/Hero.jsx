@@ -67,7 +67,7 @@ export default function Hero() {
           height: "100%",
           objectFit: "cover",
           objectPosition: "top",
-          filter: "brightness(75%)"
+          filter: "brightness(110%) contrast(110%)"
         }}
       />
 
