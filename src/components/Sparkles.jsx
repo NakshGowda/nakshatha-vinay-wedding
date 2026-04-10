@@ -11,8 +11,11 @@ export default function Sparkles() {
             left: Math.random() * 100 + "%",
             top: Math.random() * 100 + "%",
 
-            // 🐢 EXTREMELY SLOW
-            animationDuration: 80 + Math.random() * 40 + "s",
+            // ✨ short sparkle moment
+            animationDuration: 4 + Math.random() * 3 + "s",
+
+            // ⏳ BIG delay → makes it VERY RARE
+            animationDelay: Math.random() * 60 + "s",
           }}
         ></span>
       ))}
