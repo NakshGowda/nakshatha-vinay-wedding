@@ -15,7 +15,7 @@ export default function Sparkles() {
             animationDuration: 4 + Math.random() * 3 + "s",
 
             // ⏳ BIG delay → makes it VERY RARE
-            animationDelay: Math.random() * 60 + "s",
+            animationDelay: Math.random() * 120 + "s",
           }}
         ></span>
       ))}
