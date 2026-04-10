@@ -2,6 +2,8 @@
     font-size: 22px;
     font-weight: 100;
     font-style: oblique;
+    filter: brightness(110%) contrast(110%);
+
 }
 
 .shimmer {
