@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import "./story.css";
-import Sparkles from "./Sparkles";
+
 
 export default function Story() {
   return (
