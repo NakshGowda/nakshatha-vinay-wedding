@@ -1,24 +1,34 @@
+import { useEffect, useState } from "react";
 import "./sparkle.css";
 
 export default function Sparkles() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const delay = Math.random() * 120000; // up to 2 min
+
+    const timer = setTimeout(() => {
+      setVisible(true);
+
+      // remove after short sparkle
+      setTimeout(() => {
+        setVisible(false);
+      }, 2000);
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!visible) return null; // 🚫 nothing most of the time
+
   return (
-    <div className="sparkle-container">
-      {Array.from({ length: 1 }).map((_, i) => (
-        <span
-          key={i}
-          className="sparkle"
-          style={{
-            left: Math.random() * 100 + "%",
-            top: Math.random() * 100 + "%",
-
-            // ✨ short sparkle moment
-            animationDuration: 4 + Math.random() * 3 + "s",
-
-            // ⏳ BIG delay → makes it VERY RARE
-            animationDelay: Math.random() * 120 + "s",
-          }}
-        ></span>
-      ))}
-    </div>
+    <span
+      className="sparkle"
+      style={{
+        position: "absolute",
+        left: Math.random() * 100 + "%",
+        top: Math.random() * 100 + "%",
+      }}
+    ></span>
   );
 }
