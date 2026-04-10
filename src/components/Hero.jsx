@@ -16,46 +16,33 @@ export default function Hero() {
 
   // 🎵 AUTO PLAY WITH FADE-IN
   useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
+  const audio = audioRef.current;
+  if (!audio) return;
 
-    const playAudio = () => {
-      audio.volume = 0;
-      audio.play().catch(() => {});
+  const playAudio = () => {
+    audio.volume = 0;
+    audio.play().catch(() => {});
 
-      let vol = 0;
-      const interval = setInterval(() => {
-        if (vol < 0.3) {
-          vol += 0.02;
-          audio.volume = vol;
-        } else {
-          clearInterval(interval);
-        }
-      }, 100);
-    };
+    let vol = 0;
+    const interval = setInterval(() => {
+      if (vol < 0.3) {
+        vol += 0.02;
+        audio.volume = vol;
+      } else {
+        clearInterval(interval);
+      }
+    }, 100);
+  };
 
-    // Try autoplay
-    const promise = audio.play();
+  const startOnScroll = () => {
+    playAudio();
+    window.removeEventListener("scroll", startOnScroll);
+  };
 
-    if (promise !== undefined) {
-      promise
-        .then(() => {
-          playAudio();
-        })
-        .catch(() => {
-          // fallback for mobile: play on first tap
-          window.addEventListener("click", playAudio, { once: true });
-        });
-    }
-  }, []);
+  window.addEventListener("scroll", startOnScroll);
 
-  return (
-    <section style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
-
-      {/* 🎵 AUDIO */}
-      <audio ref={audioRef} loop>
-        <source src={music} type="audio/mpeg" />
-      </audio>
+  return () => window.removeEventListener("scroll", startOnScroll);
+}, []);
 
       {/* 🌟 BACKGROUND IMAGE */}
       <img 
