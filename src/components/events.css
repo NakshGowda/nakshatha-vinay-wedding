@@ -257,25 +257,7 @@
   z-index: 0;
 }
 
-/* ✨ SECTION SPARKLES ONLY */
-/* .regards-sparkles::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px),
-    radial-gradient(circle, rgba(212,175,55,0.6) 1px, transparent 1px);
-  background-size: 80px 80px, 140px 140px;
-  animation: sparkleSlow 40s linear ease-in-out;
-  opacity: 0.25;
-}
 
-@keyframes sparkleSlow {
-  from { transform: translateY(0); }
-  to { transform: translateY(-200px); }
-} */
-
-/* TEXT */
 .forever-text {
   font-size: 20px;         /* balanced (not too big) */
   letter-spacing: 4px;
