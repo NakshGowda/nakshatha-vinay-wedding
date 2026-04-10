@@ -5,18 +5,22 @@ export default function Sparkles() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const delay = Math.random() * 120000; // up to 2 min
+    function triggerSparkle() {
+      // VERY LONG RANDOM DELAY (1 to 3 minutes 😎)
+      const delay = 60000 + Math.random() * 120000;
 
-    const timer = setTimeout(() => {
-      setVisible(true);
-
-      // remove after short sparkle
       setTimeout(() => {
-        setVisible(false);
-      }, 2000);
-    }, delay);
+        setVisible(true);
 
-    return () => clearTimeout(timer);
+        // show sparkle VERY briefly
+        setTimeout(() => {
+          setVisible(false);
+          triggerSparkle(); // loop again
+        }, 1500); // visible only 1.5 sec
+      }, delay);
+    }
+
+    triggerSparkle();
   }, []);
 
   if (!visible) return null; // 🚫 nothing most of the time
@@ -25,7 +29,6 @@ export default function Sparkles() {
     <span
       className="sparkle"
       style={{
-        position: "absolute",
         left: Math.random() * 100 + "%",
         top: Math.random() * 100 + "%",
       }}
