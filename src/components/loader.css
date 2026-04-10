@@ -45,7 +45,7 @@
   );
 
   opacity: 0.4;
-  animation: shimmer 6s linear infinite;
+  animation: shimmer 6s linear ease-in-out;
 }
 
 @keyframes shimmer {

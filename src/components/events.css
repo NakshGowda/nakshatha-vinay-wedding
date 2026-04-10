@@ -28,7 +28,7 @@
     radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px),
     radial-gradient(circle, rgba(192,192,192,0.7) 1px, transparent 1px);
   background-size: 60px 60px, 120px 120px;
-  animation: sparkleMove 100s linear infinite;
+  animation: sparkleMove 100s linear ease-in-out;
   opacity: 0.25;
 }
 
@@ -269,7 +269,7 @@
     radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px),
     radial-gradient(circle, rgba(212,175,55,0.6) 1px, transparent 1px);
   background-size: 80px 80px, 140px 140px;
-  animation: sparkleSlow 40s linear infinite;
+  animation: sparkleSlow 40s linear ease-in-out;
   opacity: 0.25;
 }
 
@@ -309,7 +309,7 @@
   background: linear-gradient(90deg, transparent, #d4af37, transparent);
   top: 0;
   left: 0;
-  animation: glowMove 3s linear infinite;
+  animation: glowMove 3s linear ease-in-out;
 }
 
 @keyframes glowMove {
