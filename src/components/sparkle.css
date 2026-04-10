@@ -2,7 +2,7 @@
   position: absolute;
   width: 0;
   height: 0;
-  animation: twinkle 30s ease-in-out infinite;
+  animation: twinkle 90s ease-in-out infinite;
 }
 
 /* ✨ main sparkle lines */
@@ -44,16 +44,12 @@
 
 /* 🌟 twinkle + rotate */
 @keyframes twinkle {
-  0% {
-    opacity: 0.2;
-    transform: scale(0.6) rotate(0deg);
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.9);
   }
   50% {
-    opacity: 1;
-    transform: scale(1.4) rotate(180deg);
-  }
-  100% {
-    opacity: 0.2;
-    transform: scale(0.6) rotate(360deg);
+    opacity: 0.8;
+    transform: scale(1.05);
   }
 }
