@@ -14,35 +14,49 @@ export default function Hero() {
 
   const audioRef = useRef(null);
 
-  // 🎵 AUTO PLAY WITH FADE-IN
+  // 🎵 PLAY MUSIC ON FIRST INTERACTION (SCROLL / TOUCH)
   useEffect(() => {
-  const audio = audioRef.current;
-  if (!audio) return;
+    const audio = audioRef.current;
+    if (!audio) return;
 
-  const playAudio = () => {
-    audio.volume = 0;
-    audio.play().catch(() => {});
+    const playAudio = () => {
+      audio.volume = 0;
 
-    let vol = 0;
-    const interval = setInterval(() => {
-      if (vol < 0.3) {
-        vol += 0.02;
-        audio.volume = vol;
-      } else {
-        clearInterval(interval);
-      }
-    }, 100);
-  };
+      audio.play().catch(() => {});
 
-  const startOnScroll = () => {
-    playAudio();
-    window.removeEventListener("scroll", startOnScroll);
-  };
+      let vol = 0;
+      const interval = setInterval(() => {
+        if (vol < 0.3) {
+          vol += 0.02;
+          audio.volume = vol;
+        } else {
+          clearInterval(interval);
+        }
+      }, 100);
+    };
 
-  window.addEventListener("scroll", startOnScroll);
+    const startAudio = () => {
+      playAudio();
+      window.removeEventListener("scroll", startAudio);
+      window.removeEventListener("touchstart", startAudio);
+    };
 
-  return () => window.removeEventListener("scroll", startOnScroll);
-}, []);
+    window.addEventListener("scroll", startAudio);
+    window.addEventListener("touchstart", startAudio);
+
+    return () => {
+      window.removeEventListener("scroll", startAudio);
+      window.removeEventListener("touchstart", startAudio);
+    };
+  }, []);
+
+  return (
+    <section style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
+
+      {/* 🎵 AUDIO */}
+      <audio ref={audioRef} loop>
+        <source src={music} type="audio/mpeg" />
+      </audio>
 
       {/* 🌟 BACKGROUND IMAGE */}
       <img 
