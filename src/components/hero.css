@@ -3,13 +3,13 @@
   font-weight: 300;
   font-style: oblique;
 
-  /* 👇 DARKER GOLD */
-  color: #8b6b1f;
+  background: linear-gradient(90deg, #7a5c1a, #d4af37, #7a5c1a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 
   text-shadow:
-    0 0 6px rgba(0,0,0,0.9),
-    0 2px 12px rgba(0,0,0,0.8),
-    0 4px 18px rgba(0,0,0,0.7);
+    1px 1px 3px rgba(0,0,0,1),
+    0 0 10px rgba(0,0,0,0.9);
 }
 
 .shimmer {
