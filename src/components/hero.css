@@ -4,7 +4,7 @@
   font-style: oblique;
 
   /* 👇 DARKER GOLD */
-  color: goldenrod;
+  color: rgba(231, 169, 13, 0.722);
 
   text-shadow:
      -1px -1px 0 rgba(0,0,0,0.9),
