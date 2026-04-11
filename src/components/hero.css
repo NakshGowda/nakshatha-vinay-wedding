@@ -2,6 +2,8 @@
   font-size: 22px;
   font-weight: 500;
   font-style: bold;
+  filter: brightness(110%) contrast(110%);
+
 
   /* 👇 DARKER GOLD */
   color: goldenrod;
