@@ -104,13 +104,7 @@ useEffect(() => {
         textAlign: "center"
       }}>
           {/* 👇 ADD THIS WRAPPER */}
-  <div style={{
-    background: "rgba(0,0,0,0.45)",   // darker for mobile visibility
-    padding: "12px 20px",
-    borderRadius: "12px",
-    backdropFilter: "blur(6px)",      // premium glass effect
-    maxWidth: "90%"                   // responsive
-  }}>
+
         <motion.p
           style={{ y, scale, opacity }}
           initial={{ opacity: 0, scale: 0.8, y: 40 }}
@@ -121,7 +115,6 @@ useEffect(() => {
           A celebration of love, laughter, and beautiful moments as we begin our forever together
         </motion.p>
         </div>
-      </div>
     </section>
   );
 }
